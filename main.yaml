@@ -1,0 +1,20 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Main CloudFormation template to create a VPC by calling the vpc.yaml template.
+
+Parameters:
+  VPCName:
+    Description: The name of the VPC to be created.
+    Type: String
+
+Resources:
+  VPCStack:
+    Type: 'AWS::CloudFormation::Stack'
+    Properties:
+      TemplateURL: 'https://s3.amazonaws.com/your-bucket/vpc.yaml'
+      Parameters:
+        VPCName: !Ref VPCName
+
+Outputs:
+  VPCId:
+    Description: The ID of the created VPC.
+    Value: !GetAtt VPCStack.Outputs.VPCId

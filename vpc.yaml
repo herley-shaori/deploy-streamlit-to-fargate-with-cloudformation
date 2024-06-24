@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: CloudFormation template to create a VPC with a parameterized name and CIDR block /26.
+
+Parameters:
+  VPCName:
+    Description: The name of the VPC to be created.
+    Type: String
+
+Resources:
+  MyVPC:
+    Type: 'AWS::EC2::VPC'
+    Properties:
+      CidrBlock: '10.0.0.0/26'
+      Tags:
+        - Key: Name
+          Value: !Ref VPCName
+
+Outputs:
+  VPCId:
+    Description: The ID of the created VPC.
+    Value: !Ref MyVPC
